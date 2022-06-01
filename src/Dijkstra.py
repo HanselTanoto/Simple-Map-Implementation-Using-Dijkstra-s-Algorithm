@@ -40,6 +40,8 @@ class Dijkstra:
     
     # Get path from start to end node
     def get_path(self):
+        if (self.prev_node[self.end] == None and self.start != self.end):
+            return []
         path = [self.end]
         while path[-1] != self.start:
             path.append(self.prev_node[path[-1]])
