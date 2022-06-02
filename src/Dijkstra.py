@@ -1,20 +1,20 @@
 import sys
 
 # CONSTANT
-INFTY = sys.maxsize
+INFTY = float("inf")
 
 # Dijkstra class
 class Dijkstra:
     def __init__(self, graph, start, end):
         self.graph = graph                                          # DirectedGraph object
-        self.start = start                                          # Start node
-        self.end = end                                              # End node
+        self.start = graph.nodes_name.index(start)                  # Start node
+        self.end = graph.nodes_name.index(end)                      # End node
         self.shortest_dist = [INFTY for i in range(graph.nodes)]    # Shortest distance from start to each node
-        self.shortest_dist[start] = 0                               # Distance from start node to itself is 0
+        self.shortest_dist[self.start] = 0                          # Distance from start node to itself is 0
         self.prev_node = [None for i in range(graph.nodes)]         # Previous node in the shortest path
         self.visited = [False for i in range(graph.nodes)]          # Indicates whether a node has been visited
         self.unvisited = []                                         # Explored nodes that are not visited
-        self.unvisited.append(start)                                # Start node is added to unvisited list
+        self.unvisited.append(self.start)                                # Start node is added to unvisited list
         self.path = []                                              # Path from start to end node
         self.distance = 0                                           # Distance from start to end node
         self.iterate = 0                                            # Iteration count
@@ -42,9 +42,9 @@ class Dijkstra:
     def get_path(self):
         if (self.prev_node[self.end] == None and self.start != self.end):
             return []
-        path = [self.end]
-        while path[-1] != self.start:
-            path.append(self.prev_node[path[-1]])
+        path = [self.graph.nodes_name[self.end]]
+        while path[-1] != self.graph.nodes_name[self.start]:
+            path.append(self.graph.nodes_name[self.prev_node[self.graph.nodes_name.index(path[-1])]])
         return path[::-1]
     
     # Get path from start to end node as a string
@@ -59,7 +59,7 @@ class Dijkstra:
     
     # Print path from start to end node
     def print_path(self):
-        print("Shortest path from", self.start, "to", self.end, "is:", end=" ")
+        print("Shortest path from", self.graph.nodes_name[self.start], "to", self.graph.nodes_name[self.end], "is:", end=" ")
         print(self.path)
         print("Distance:", self.distance)
     
@@ -68,7 +68,7 @@ class Dijkstra:
         result = ""
         for j in range(self.graph.nodes):
             if (self.step[i][j] == INFTY):
-                result += "   Node" + str(j) + "   :   " + "-" + "\n"
+                result += "   Node " + self.graph.nodes_name[j] + "   :   " + "-" + "\n"
             else:
-                result += "   Node" + str(j) + "   :   " + str(self.step[i][j]) + "\n"
+                result += "   Node " + self.graph.nodes_name[j] + "   :   " + str(self.step[i][j]) + "\n"
         return result
