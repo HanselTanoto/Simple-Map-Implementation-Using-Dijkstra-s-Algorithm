@@ -1,0 +1,9 @@
+Reykjavik Oslo 5
+Reykjavik London 4
+Oslo Berlin 1
+Oslo Moscow 3
+Moscow Belgrade 5
+Moscow Athens 4
+Athens Belgrade 1
+Rome Berlin 2
+Rome Athens 2
