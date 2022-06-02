@@ -1,6 +1,8 @@
+# DirectedGraph Class
 class DirectedGraph:
-    def __init__(self, matrix):
+    def __init__(self, matrix, nodes_name):
         self.matrix = matrix
+        self.nodes_name = nodes_name
         self.nodes = len(matrix)
     
     # Add a new edge to the graph
@@ -20,4 +22,4 @@ class DirectedGraph:
     
     # Get the weight of an edge
     def get_weight(self, u, v):
-        return int(self.matrix[u][v])
+        return self.matrix[u][v]
